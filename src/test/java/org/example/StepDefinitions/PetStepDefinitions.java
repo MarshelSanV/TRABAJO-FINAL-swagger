@@ -33,29 +33,30 @@ public class PetStepDefinitions {
         OnStage.theActorCalled("Tatiana").whoCan(CallAnApi.at("https://petstore.swagger.io/v2"));
     }
 
-    @Cuando("el actor registra una mascota con nombre {string} y raza {string} y estado {string}")
-    public void elActorRegistraUnaMascotaConNombreYRazaYEstado(String nombre, String raza, String estado) {
+    @Cuando("el actor registra una mascota con nombre {string} y imagen {string} y raza {string} y estado {string}")
+    public void elActorRegistraUnaMascotaConNombreYImagenYRazaYEstado(String nombre, String imagen, String raza, String estado) {
         String idMascota = String.valueOf((long) (Math.random() * 1000000000L));
         theActorInTheSpotlight().remember("petId", idMascota);
-        theActorInTheSpotlight().attemptsTo(PostPet.fromPage(idMascota, nombre, raza, estado));
+        theActorInTheSpotlight().attemptsTo(PostPet.fromPage(idMascota, nombre, imagen, raza, estado));
     }
 
-    @Y("la respuesta debe contener el nombre {string} y la raza {string} y el estado {string}")
-    public void laRespuestaDebeContenerElNombreYLaRazaYElEstado(String nombre, String raza, String estado) {
+    @Y("la respuesta debe contener el nombre {string} y la imagen {string} y la raza {string} y el estado {string}")
+    public void laRespuestaDebeContenerElNombreYLaImagenYLaRazaYElEstado(String nombre, String imagen, String raza, String estado) {
         SerenityRest.restAssuredThat(response -> response
                 .body("id", notNullValue())
                 .body("name", equalTo(nombre))
+                .body("photoUrls[0]", equalTo(imagen))
                 .body("tags[0].name", equalTo(raza))
                 .body("status", equalTo(estado))
                 .time(lessThan(5000L))
         );
     }
 
-    @Y("existe una mascota registrada con nombre {string} y raza {string} y estado {string}")
-    public void existeUnaMascotaRegistradaConNombreYRazaYEstado(String nombre, String raza, String estado) {
+    @Y("existe una mascota registrada con nombre {string} y imagen {string} y raza {string} y estado {string}")
+    public void existeUnaMascotaRegistradaConNombreYImagenYRazaYEstado(String nombre, String imagen, String raza, String estado) {
         String idMascota = String.valueOf((long) (Math.random() * 1000000000L));
         theActorInTheSpotlight().remember("petId", idMascota);
-        theActorInTheSpotlight().attemptsTo(PostPet.fromPage(idMascota, nombre, raza, estado));
+        theActorInTheSpotlight().attemptsTo(PostPet.fromPage(idMascota, nombre, imagen, raza, estado));
     }
 
     @Cuando("el actor consulta la mascota por su ID")
@@ -64,10 +65,10 @@ public class PetStepDefinitions {
         theActorInTheSpotlight().attemptsTo(GetPet.fromPage(idMascota));
     }
 
-    @Cuando("el actor actualiza el estado de la mascota a {string} con el nombre {string} y raza {string}")
-    public void elActorActualizaElEstadoDeLaMascotaAConElNombreYRaza(String estado, String nombre, String raza) {
+    @Cuando("el actor actualiza el estado de la mascota a {string} con el nombre {string} y imagen {string} y raza {string}")
+    public void elActorActualizaElEstadoDeLaMascotaAConElNombreYImagenYRaza(String estado, String nombre, String imagen, String raza) {
         String idMascota = theActorInTheSpotlight().recall("petId");
-        theActorInTheSpotlight().attemptsTo(PutPet.fromPage(idMascota, nombre, raza, estado));
+        theActorInTheSpotlight().attemptsTo(PutPet.fromPage(idMascota, nombre, imagen, raza, estado));
     }
 
     @Cuando("el actor elimina la mascota")
