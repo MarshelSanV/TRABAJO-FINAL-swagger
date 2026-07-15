@@ -1,6 +1,6 @@
 # Documentación del Proyecto de Automatización de APIs (Swagger PetStore)
 
-Este proyecgit statusto contiene la suite completa de pruebas automatizadas para la API de **Swagger PetStore (Mascotas)**. Está implementado bajo el patrón de diseño **Screenplay** en Serenity BDD con Cucumber y Java 17.
+Este proyecto contiene la estructura completa de pruebas automatizadas para la API de **Swagger PetStore (Mascotas)**. Está implementado bajo el patrón de diseño **Screenplay** en Serenity BDD con Cucumber y Java 17.
 
 ---
 
