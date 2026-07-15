@@ -12,16 +12,18 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 public class PutPet implements Task {
     private final String id;
     private final String name;
+    private final String raza;
     private final String status;
 
-    public PutPet(String id, String name, String status) {
+    public PutPet(String id, String name, String raza, String status) {
         this.id = id;
         this.name = name;
+        this.raza = raza;
         this.status = status;
     }
 
-    public static Performable fromPage(String id, String name, String status) {
-        return instrumented(PutPet.class, id, name, status);
+    public static Performable fromPage(String id, String name, String raza, String status) {
+        return instrumented(PutPet.class, id, name, raza, status);
     }
 
     @Override
@@ -40,11 +42,11 @@ public class PutPet implements Task {
                   "tags": [
                     {
                       "id": 1,
-                      "name": "friendly"
+                      "name": "%s"
                     }
                   ],
                   "status": "%s"
-                }""".formatted(id, name, status);
+                }""".formatted(id, name, raza, status);
 
         actor.attemptsTo(
                 Put.to("/pet")
