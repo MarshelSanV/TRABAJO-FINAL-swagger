@@ -35,14 +35,7 @@ CapacitacionApiAuto/
 
 ---
 
-## 2. Características Novedosas del Framework
-
-*   **Validación de Latencia y Rendimiento (SLA Check):** Cada vez que se consulta o actualiza la mascota, el framework comprueba de manera integrada en las aserciones de Serenity que el tiempo de respuesta del servidor sea menor a 5000 milisegundos (`.time(lessThan(5000L))`), garantizando la velocidad de la API además de su correctitud funcional.
-*   **Aserción de Integridad Estructural:** Se valida que los IDs generados por el API no sean nulos (`.body("id", notNullValue())`), previniendo registros corruptos en base de datos.
-
----
-
-## 3. Flujo de Negocio y Lógica del CRUD
+## 2. Flujo de Negocio y Lógica del CRUD
 
 El flujo de pruebas sigue el estándar CRUD de forma autónoma:
 
@@ -53,7 +46,7 @@ El flujo de pruebas sigue el estándar CRUD de forma autónoma:
 
 ---
 
-## 4. Parámetros de Prueba (Luna, Max y Lhyo)
+## 3. Parámetros de Prueba (Luna, Max y Lhyo)
 
 Se ejecutan múltiples combinaciones a través de un `Scenario Outline` con los siguientes perritos:
 *   **luna** | Raza: *labrador* | Estado inicial: *disponible* | Estado final: *adoptado*
@@ -62,12 +55,6 @@ Se ejecutan múltiples combinaciones a través de un `Scenario Outline` con los 
 
 ---
 
-## 5. Instrucciones para Ejecutar y Ver el Reporte
-
-### Ejecución
-Abre tu consola de comandos en la raíz del proyecto y corre:
-```bash
-mvn clean verify
 ```
 
 ### Reporte Serenity
